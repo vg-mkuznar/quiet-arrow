@@ -1,0 +1,17 @@
+{
+  "name": "Quiet Arrow",
+  "short_name": "Quiet Arrow",
+  "description": "A calm custom trip companion for a Lake Arrowhead writing weekend with pugs, grill meals, notes, and offline support.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#eef3fb",
+  "theme_color": "#eef3fb",
+  "icons": [
+    {
+      "src": "./icon-app.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

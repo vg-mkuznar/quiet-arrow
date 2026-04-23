@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="Quiet Arrow: a custom Lake Arrowhead getaway app with itinerary, food, places, notes, and PWA install support."
+    />
+    <meta name="theme-color" content="#0f1115" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#eef3fb" media="(prefers-color-scheme: light)" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Quiet Arrow" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icon-app.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./icon-app.svg" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Quiet Arrow</title>
+  </head>
+  <body>
+    <div id="splash" class="splash" aria-hidden="true">
+      <div class="splash-mark glass">
+        <span class="splash-kicker">Quiet Arrow</span>
+        <strong>Lake Arrowhead</strong>
+        <span class="splash-sub">Pages, pugs, pine air.</span>
+      </div>
+    </div>
+
+    <div class="ambient">
+      <div class="orb orb-a"></div>
+      <div class="orb orb-b"></div>
+      <div class="orb orb-c"></div>
+    </div>
+
+    <div class="app-shell">
+      <header class="topbar glass">
+        <div>
+          <p class="eyebrow">Quiet Arrow</p>
+          <h1 id="app-title">Lake Arrowhead</h1>
+        </div>
+        <button id="install-button" class="icon-button hidden" type="button">
+          Install
+        </button>
+      </header>
+
+      <main id="screens" class="screens" aria-live="polite">
+        <section class="screen active" data-screen="today">
+          <div class="hero-card glass">
+            <div class="hero-copy">
+              <p class="eyebrow">April 30 - May 3, 2026</p>
+              <h2 id="trip-status-title">Your getaway is loading.</h2>
+              <p id="trip-status-copy" class="muted"></p>
+            </div>
+            <div class="hero-pills">
+              <span id="status-pill" class="pill strong"></span>
+              <span class="pill">Slow mornings protected</span>
+              <span class="pill">Daily writing built in</span>
+            </div>
+          </div>
+
+          <div class="panel-grid">
+            <article class="glass panel">
+              <div class="panel-head">
+                <h3>What’s Next</h3>
+                <span id="today-label" class="chip"></span>
+              </div>
+              <div id="next-up" class="next-up"></div>
+              <div class="quick-actions">
+                <button class="action" data-jump="places">Directions</button>
+                <button class="action" data-jump="food">Recipes</button>
+                <button class="action" data-jump="notes">Notes</button>
+                <button class="action" data-jump="more">Packing</button>
+              </div>
+            </article>
+
+            <article class="glass panel weather-panel">
+              <div class="panel-head">
+                <h3>Weather</h3>
+                <span class="chip">Seeded</span>
+              </div>
+              <div id="weather-summary" class="weather-summary"></div>
+              <div id="weather-days" class="weather-days"></div>
+            </article>
+          </div>
+
+          <div class="panel-grid">
+            <article class="glass panel">
+              <div class="panel-head">
+                <h3>Base Camp</h3>
+                <span class="chip">Location summary</span>
+              </div>
+              <p id="anchor-summary" class="muted"></p>
+            </article>
+
+            <article class="glass panel">
+              <div class="panel-head">
+                <h3>Stay Reminders</h3>
+                <span class="chip">Check-in / out</span>
+              </div>
+              <ul id="stay-reminders" class="mini-list"></ul>
+            </article>
+          </div>
+
+          <article class="glass panel">
+            <div class="panel-head">
+              <h3>Today At A Glance</h3>
+              <span class="chip">Right now view</span>
+            </div>
+            <div id="today-plan" class="today-plan"></div>
+          </article>
+
+          <div class="panel-grid">
+            <article class="glass panel focus-cta">
+              <div class="panel-head">
+                <h3>Writing Block</h3>
+                <span id="writing-summary" class="chip"></span>
+              </div>
+              <p class="muted">
+                Quiet, low-pressure sessions built for pages first and fuss never.
+              </p>
+              <button class="primary-button" data-jump="more">Open Focus Mode</button>
+            </article>
+
+            <article class="glass panel pug-cta">
+              <div class="panel-head">
+                <h3>Pug Pace</h3>
+                <span class="chip">Gentle reminder</span>
+              </div>
+              <ul id="pug-reminders" class="mini-list"></ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="screen" data-screen="itinerary">
+          <div class="screen-header">
+            <div>
+              <p class="eyebrow">Editable plan</p>
+              <h2>Weekend flow</h2>
+            </div>
+            <p class="muted compact">
+              Tap any block to edit it and make the weekend yours.
+            </p>
+          </div>
+          <div id="itinerary-days" class="itinerary-days"></div>
+        </section>
+
+        <section class="screen" data-screen="food">
+          <div class="screen-header">
+            <div>
+              <p class="eyebrow">Food</p>
+              <h2>Grill-friendly meals</h2>
+            </div>
+            <p class="muted compact">Favorites and shopping stay saved on this device.</p>
+          </div>
+
+          <div id="recipe-list" class="recipe-list"></div>
+
+          <article class="glass panel">
+            <div class="panel-head">
+              <h3>Grocery List</h3>
+              <button id="reset-groceries" class="text-button" type="button">
+                Reset
+              </button>
+            </div>
+            <div id="grocery-groups" class="grocery-groups"></div>
+          </article>
+        </section>
+
+        <section class="screen" data-screen="places">
+          <div class="screen-header">
+            <div>
+              <p class="eyebrow">Places</p>
+              <h2>Nearby and useful</h2>
+            </div>
+            <p class="muted compact">
+              Anchored to Lake Arrowhead Village and Blue Jay because the public Airbnb
+              link does not reveal the exact street address.
+            </p>
+          </div>
+          <div id="places-list" class="places-list"></div>
+        </section>
+
+        <section class="screen" data-screen="notes">
+          <div class="screen-header">
+            <div>
+              <p class="eyebrow">Trip log</p>
+              <h2>Notes and memory scraps</h2>
+            </div>
+          </div>
+          <div class="notes-grid">
+            <article class="glass panel">
+              <div class="panel-head">
+                <h3>Script thoughts</h3>
+                <span class="chip">Persistent</span>
+              </div>
+              <textarea
+                id="note-script"
+                class="note-pad"
+                placeholder="Loose scene ideas, dialogue scraps, structure thoughts..."
+              ></textarea>
+            </article>
+            <article class="glass panel">
+              <div class="panel-head">
+                <h3>Things to buy</h3>
+                <span class="chip">Persistent</span>
+              </div>
+              <textarea
+                id="note-buy"
+                class="note-pad"
+                placeholder="Forgotten items, extra groceries, impulse cabin needs..."
+              ></textarea>
+            </article>
+            <article class="glass panel">
+              <div class="panel-head">
+                <h3>Places I liked</h3>
+                <span class="chip">Persistent</span>
+              </div>
+              <textarea
+                id="note-places"
+                class="note-pad"
+                placeholder="Coffee shop worth repeating, scenic pull-off, easy dog stop..."
+              ></textarea>
+            </article>
+            <article class="glass panel">
+              <div class="panel-head">
+                <h3>Weekend memories</h3>
+                <span class="chip">Persistent</span>
+              </div>
+              <textarea
+                id="note-memories"
+                class="note-pad"
+                placeholder="Tiny moments worth keeping..."
+              ></textarea>
+            </article>
+          </div>
+        </section>
+
+        <section class="screen" data-screen="more">
+          <div class="screen-header">
+            <div>
+              <p class="eyebrow">More</p>
+              <h2>Prep, focus, and details</h2>
+            </div>
+          </div>
+
+          <article class="glass panel focus-panel">
+            <div class="panel-head">
+              <h3>Writing Mode</h3>
+              <button id="focus-toggle" class="text-button" type="button">
+                Enter Focus
+              </button>
+            </div>
+            <p class="muted">
+              Pick a session length, hit start, and let the interface go quiet.
+            </p>
+            <div class="timer-wrap">
+              <div id="timer-display" class="timer-display">50:00</div>
+              <div class="timer-actions">
+                <button class="timer-chip" data-timer-preset="25">25 min</button>
+                <button class="timer-chip active" data-timer-preset="50">50 min</button>
+                <button class="timer-chip" data-timer-preset="90">90 min</button>
+              </div>
+              <div class="timer-buttons">
+                <button id="timer-start" class="primary-button">Start</button>
+                <button id="timer-pause" class="secondary-button">Pause</button>
+                <button id="timer-reset" class="secondary-button">Reset</button>
+              </div>
+            </div>
+            <div id="writing-sessions" class="writing-sessions"></div>
+          </article>
+
+          <div class="stack-grid">
+            <article class="glass panel">
+              <div class="panel-head">
+                <h3>Packing List</h3>
+                <button id="reset-packing" class="text-button" type="button">Reset</button>
+              </div>
+              <div id="packing-groups" class="grocery-groups"></div>
+            </article>
+
+            <article class="glass panel">
+              <div class="panel-head">
+                <h3>Pug Checklist</h3>
+                <button id="reset-pugs" class="text-button" type="button">Reset</button>
+              </div>
+              <div id="pug-groups" class="grocery-groups"></div>
+            </article>
+          </div>
+
+          <div class="stack-grid">
+            <article class="glass panel">
+              <div class="panel-head">
+                <h3>Trip Settings</h3>
+              </div>
+              <label class="toggle-row">
+                <span>Dark mode</span>
+                <input id="theme-toggle" type="checkbox" />
+              </label>
+              <label class="toggle-row">
+                <span>Reduced motion</span>
+                <input id="motion-toggle" type="checkbox" />
+              </label>
+            </article>
+
+            <article class="glass panel">
+              <div class="panel-head">
+                <h3>App Info</h3>
+              </div>
+              <div class="info-list">
+                <p><strong>Name options:</strong> Quiet Arrow, Pines & Pages, Blue Jay Weekend, Slow Cabin, Arrowhead Edit.</p>
+                <p><strong>Chosen:</strong> Quiet Arrow.</p>
+                <p><strong>Install:</strong> Open the deployed app in Safari on iPhone, tap Share, then tap Add to Home Screen.</p>
+                <p><strong>Offline:</strong> Core trip data, lists, and notes are cached after first load when served over HTTPS.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <nav class="bottom-nav glass" aria-label="Primary">
+        <button class="nav-item active" data-target="today" type="button">Today</button>
+        <button class="nav-item" data-target="itinerary" type="button">Itinerary</button>
+        <button class="nav-item" data-target="food" type="button">Food</button>
+        <button class="nav-item" data-target="places" type="button">Places</button>
+        <button class="nav-item" data-target="notes" type="button">Notes</button>
+        <button class="nav-item" data-target="more" type="button">More</button>
+      </nav>
+    </div>
+
+    <div id="focus-overlay" class="focus-overlay hidden">
+      <div class="focus-inner glass">
+        <p class="eyebrow">Writing Mode</p>
+        <h2>Quiet block in progress</h2>
+        <div id="focus-overlay-time" class="timer-display">50:00</div>
+        <p class="muted">Phones down, tabs closed, keep the sentence moving.</p>
+        <button id="exit-focus" class="primary-button">Exit Focus</button>
+      </div>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
