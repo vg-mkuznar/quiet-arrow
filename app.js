@@ -163,7 +163,7 @@ function renderWeather() {
 }
 
 function renderStayMeta() {
-  els.anchorSummary.textContent = trip.anchor.detail;
+  els.anchorSummary.textContent = `${trip.anchor.detail} ${trip.anchor.address}`;
   els.stayReminders.innerHTML = `
     <li>${trip.reminders.checkIn}</li>
     <li>${trip.reminders.checkOut}</li>
@@ -342,7 +342,7 @@ function renderPlaces() {
           <p>${place.useful}</p>
           <div class="store-actions">
             <a href="${place.url}" target="_blank" rel="noreferrer">Open in Maps</a>
-            <a href="${trip.anchor.airbnbUrl}" target="_blank" rel="noreferrer">Airbnb anchor</a>
+            <a href="${trip.anchor.directionsUrl}" target="_blank" rel="noreferrer">Cabin directions</a>
           </div>
         </article>
       `,

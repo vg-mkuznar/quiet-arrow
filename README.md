@@ -33,7 +33,7 @@ Quiet Arrow is the chosen app name and the one used throughout the build.
 - [trip-data.js](/Users/kuzzz/Documents/Codex/2026-04-22-im-heading-to-lake-arrow-head/trip-data.js)
 - [manifest.webmanifest](/Users/kuzzz/Documents/Codex/2026-04-22-im-heading-to-lake-arrow-head/manifest.webmanifest)
 - [sw.js](/Users/kuzzz/Documents/Codex/2026-04-22-im-heading-to-lake-arrow-head/sw.js)
-- [assets/icons/icon-app.svg](/Users/kuzzz/Documents/Codex/2026-04-22-im-heading-to-lake-arrow-head/assets/icons/icon-app.svg)
+- [icon-app.svg](/Users/kuzzz/Documents/Codex/2026-04-22-im-heading-to-lake-arrow-head/icon-app.svg)
 
 ## Running Locally
 
@@ -84,6 +84,6 @@ Update that file to change:
 
 ## Notes About Live Data
 
-- The public Airbnb link used here does not expose the exact address, so place recommendations are centered on Lake Arrowhead Village and Blue Jay.
+- The location seed is now pinned to `1042 Inspiration Drive, Lake Arrowhead, CA 92352` based on the booking screenshot you shared.
 - The weather module is intentionally seeded with placeholder forecast values and a clear integration point in `trip.weather`.
 - Service worker caching works only over `http://localhost` or `https`, not `file://`.

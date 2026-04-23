@@ -6,15 +6,20 @@ export const trip = {
     end: "2026-05-03T13:00:00-07:00",
   },
   anchor: {
-    title: "Lake Arrowhead, centered on Village + Blue Jay",
+    title: "1042 Inspiration Drive, Lake Arrowhead",
     detail:
-      "The public Airbnb share page for room 1339834556963667356 does not reveal the exact street address, so local recommendations are seeded around central Lake Arrowhead.",
+      "Cabin anchor updated from your booking screenshot: 1042 Inspiration Drive. Nearby picks are now framed from the house instead of from a generic Village center point.",
+    address: "1042 Inspiration Drive, Lake Arrowhead, CA 92352",
+    directionsUrl:
+      "https://maps.apple.com/?address=1042%20Inspiration%20Drive,%20Lake%20Arrowhead,%20CA%2092352",
     airbnbUrl:
       "https://www.airbnb.com/rooms/1339834556963667356?unique_share_id=7950aa1b-0657-40df-93d3-87cdf2fcd092&viralityEntryPoint=1&s=76",
   },
   reminders: {
-    checkIn: "Thursday, April 30: grocery stop before check-in, then settle the dogs first.",
-    checkOut: "Sunday, May 3: light tidy by late morning so checkout stays calm.",
+    checkIn:
+      "Thursday, April 30 at 3:00 PM: grocery stop first if needed, then get the pugs settled at 1042 Inspiration Drive before anything else.",
+    checkOut:
+      "Sunday, May 3 at 11:00 AM: start a light tidy in the morning so checkout stays calm.",
   },
   weather: {
     summary:
@@ -43,7 +48,7 @@ export const itinerary = [
       morning:
         "Leave without rushing. Coffee, final pack check, and one solid pug walk before heading up.",
       afternoon:
-        "Stop at Stater Bros first, then check in, unload, and give the dogs time to sniff and settle before anything else.",
+        "Stop at Stater Bros or Jensen's first, then head to 1042 Inspiration Drive for check-in, unloading, and a full dog decompression window before anything else.",
       evening:
         "Grill rosemary-garlic chicken thighs, corn, and potatoes. Keep the night soft with light writing notes only.",
       optional:
@@ -68,7 +73,7 @@ export const itinerary = [
       morning:
         "Sleep in, slow coffee, deck air, and a very casual pug walk. No alarms unless absolutely needed.",
       afternoon:
-        "Primary writing session after brunch. Later, head toward the Village or Blue Jay for a coffee or relaxed browse.",
+        "Primary writing session after brunch. Later, head into the Village or Blue Jay for coffee, supplies, or a relaxed browse if leaving the cabin sounds better than staying in.",
       evening:
         "Grill steak, asparagus, and garlic bread. Sunset dog hang, then either a movie or a read-through.",
       optional:
@@ -316,8 +321,8 @@ export const places = [
     id: "stater",
     name: "Stater Bros. Markets",
     category: "Groceries",
-    time: "About 5 min from central Lake Arrowhead",
-    useful: "Best first-stop grocery run with meat, produce, deli, and later hours.",
+    time: "About 8-10 min from the cabin",
+    useful: "Best first-stop grocery run before check-in, with strong basics for grill nights and later hours.",
     address: "28100 CA-189, Lake Arrowhead, CA 92352",
     url: "https://maps.apple.com/?address=28100%20CA-189,%20Lake%20Arrowhead,%20CA%2092352",
   },
@@ -325,8 +330,8 @@ export const places = [
     id: "jensens",
     name: "Jensen's Foods",
     category: "Groceries + bakery",
-    time: "About 7 min",
-    useful: "Good curated backup with bakery, coffee, and a slightly nicer market feel.",
+    time: "About 10-12 min",
+    useful: "Great backup or splurge stop with bakery, nicer provisions, and an easy Blue Jay errand loop.",
     address: "27264 CA-189, Blue Jay, CA 92317",
     url: "https://maps.apple.com/?address=27264%20CA-189,%20Blue%20Jay,%20CA%2092317",
   },
@@ -334,8 +339,8 @@ export const places = [
     id: "tea-coffee",
     name: "Tea & Coffee Exchange",
     category: "Coffee",
-    time: "About 5 min",
-    useful: "Easy Village coffee stop with pastries and a scenic walk-after pickup.",
+    time: "About 8-10 min",
+    useful: "Easy Village coffee stop with pastries and a scenic walk right after pickup.",
     address: "28200 CA-189, Suite S-250, Lake Arrowhead, CA 92352",
     url: "https://maps.apple.com/?address=28200%20CA-189%20Suite%20S-250,%20Lake%20Arrowhead,%20CA%2092352",
   },
@@ -343,7 +348,7 @@ export const places = [
     id: "starbucks",
     name: "Starbucks at Blue Jay",
     category: "Coffee",
-    time: "About 7 min",
+    time: "About 10-12 min",
     useful: "Predictable coffee run if you just need caffeine and zero decision-making.",
     address: "27264 CA-189, Blue Jay, CA 92317",
     url: "https://maps.apple.com/?address=27264%20CA-189,%20Blue%20Jay,%20CA%2092317",
@@ -352,7 +357,7 @@ export const places = [
     id: "stone-creek",
     name: "Stone Creek Bistro",
     category: "Casual dinner",
-    time: "About 7 min",
+    time: "About 10-12 min",
     useful: "Good fallback dinner if you decide not to grill one night.",
     address: "26824 CA-189, Blue Jay, CA 92317",
     url: "https://maps.apple.com/?address=26824%20CA-189,%20Blue%20Jay,%20CA%2092317",
@@ -361,28 +366,28 @@ export const places = [
     id: "taproom",
     name: "The Lakefront Taproom Bar & Kitchen",
     category: "Casual restaurant",
-    time: "About 5 min",
+    time: "About 8-10 min",
     useful: "Village option with a lakefront setting when you want to be out without overcommitting.",
-    address: "28200 CA-189, Lake Arrowhead, CA 92352",
-    url: "https://maps.apple.com/?address=28200%20CA-189,%20Lake%20Arrowhead,%20CA%2092352",
+    address: "27984 CA-189 Unit E-200, Lake Arrowhead, CA 92352",
+    url: "https://maps.apple.com/?address=27984%20CA-189%20Unit%20E-200,%20Lake%20Arrowhead,%20CA%2092352",
   },
   {
     id: "village",
     name: "Lake Arrowhead Village",
     category: "Scenic / stroll",
-    time: "About 5 min",
-    useful: "The easiest scenic wander with shops, snacks, and easy orientation.",
+    time: "About 8-10 min",
+    useful: "The easiest scenic wander from the cabin, with snacks, lake views, and a low-effort outing.",
     address: "28200 CA-189, Lake Arrowhead, CA 92352",
     url: "https://maps.apple.com/?address=28200%20CA-189,%20Lake%20Arrowhead,%20CA%2092352",
   },
   {
-    id: "north-shore",
-    name: "North Shore Recreation Trail",
+    id: "heaps-peak",
+    name: "Heaps Peak Arboretum",
     category: "Dog-friendly outing",
-    time: "About 15-20 min",
-    useful: "One of the better known dog-friendly trail options nearby if the pugs want a bigger outing.",
-    address: "Lake Arrowhead, CA",
-    url: "https://maps.apple.com/?q=North%20Shore%20Recreation%20Trail%20Lake%20Arrowhead",
+    time: "About 18-20 min",
+    useful: "An easier leash-friendly nature stop if the pugs want fresh air without committing to a longer trail day.",
+    address: "Heaps Peak Arboretum Trail 3W05, Skyforest area",
+    url: "https://maps.apple.com/?q=Heaps%20Peak%20Arboretum",
   },
 ];
 
