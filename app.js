@@ -81,8 +81,10 @@ const els = {
 
 let deferredPrompt = null;
 let timerInterval = null;
+let activePressTarget = null;
 
 function setScreen(target) {
+  const changed = state.activeScreen !== target;
   state.activeScreen = target;
   els.screens.forEach((screen) => {
     screen.classList.toggle("active", screen.dataset.screen === target);
@@ -90,6 +92,8 @@ function setScreen(target) {
   els.navItems.forEach((item) => {
     item.classList.toggle("active", item.dataset.target === target);
   });
+  window.scrollTo({ top: 0, behavior: state.reduceMotion ? "auto" : "smooth" });
+  if (changed) vibrate(8);
 }
 
 function formatCountdown(start) {
@@ -459,6 +463,7 @@ function bindControls() {
       .forEach((key) => delete state.checklist[key]);
     storage.set("qa.checklist", state.checklist);
     render();
+    vibrate([8, 24, 8]);
   });
 
   document.querySelector("#reset-packing").addEventListener("click", () => {
@@ -467,6 +472,7 @@ function bindControls() {
       .forEach((key) => delete state.checklist[key]);
     storage.set("qa.checklist", state.checklist);
     render();
+    vibrate([8, 24, 8]);
   });
 
   document.querySelector("#reset-pugs").addEventListener("click", () => {
@@ -475,22 +481,28 @@ function bindControls() {
       .forEach((key) => delete state.checklist[key]);
     storage.set("qa.checklist", state.checklist);
     render();
+    vibrate([8, 24, 8]);
   });
 
   els.themeToggle.addEventListener("change", () => {
     state.themeDark = els.themeToggle.checked;
     storage.set("qa.themeDark", state.themeDark);
     applyTheme();
+    vibrate(10);
   });
 
   els.motionToggle.addEventListener("change", () => {
     state.reduceMotion = els.motionToggle.checked;
     storage.set("qa.reduceMotion", state.reduceMotion);
     applyTheme();
+    vibrate(10);
   });
 
   document.querySelectorAll("[data-timer-preset]").forEach((button) => {
-    button.addEventListener("click", () => setTimerPreset(Number(button.dataset.timerPreset)));
+    button.addEventListener("click", () => {
+      setTimerPreset(Number(button.dataset.timerPreset));
+      vibrate(8);
+    });
   });
 
   document.querySelector("#timer-start").addEventListener("click", () => {
@@ -499,31 +511,71 @@ function bindControls() {
     storage.set("qa.timer", state.timer);
     startTimerLoop();
     updateTimerUI();
+    vibrate([10, 30, 14]);
   });
 
   document.querySelector("#timer-pause").addEventListener("click", () => {
     tickTimer();
     stopTimer();
     updateTimerUI();
+    vibrate(10);
   });
 
   document.querySelector("#timer-reset").addEventListener("click", () => {
     setTimerPreset(state.timer.preset);
+    vibrate([8, 22, 8]);
   });
 
   els.focusToggle.addEventListener("click", () => {
     els.focusOverlay.classList.remove("hidden");
     document.body.style.overflow = "hidden";
+    vibrate([10, 20, 10]);
   });
 
   els.exitFocus.addEventListener("click", () => {
     els.focusOverlay.classList.add("hidden");
     document.body.style.overflow = "";
+    vibrate(10);
   });
 }
 
 function vibrate(pattern = 10) {
   if (navigator.vibrate) navigator.vibrate(pattern);
+}
+
+function animateTap(target) {
+  target.classList.remove("clicked");
+  // Force a reflow so quick repeated taps still replay the animation.
+  void target.offsetWidth;
+  target.classList.add("clicked");
+  window.setTimeout(() => target.classList.remove("clicked"), 340);
+}
+
+function bindPressFeedback() {
+  const getPressable = (node) => node?.closest("button, a, .check-item, .toggle-row");
+
+  document.addEventListener("pointerdown", (event) => {
+    const pressable = getPressable(event.target);
+    if (!pressable) return;
+    activePressTarget = pressable;
+    pressable.classList.add("pressing");
+  });
+
+  const clearPress = () => {
+    if (!activePressTarget) return;
+    activePressTarget.classList.remove("pressing");
+    activePressTarget = null;
+  };
+
+  document.addEventListener("pointerup", clearPress);
+  document.addEventListener("pointercancel", clearPress);
+  document.addEventListener("pointerleave", clearPress);
+
+  document.addEventListener("click", (event) => {
+    const pressable = getPressable(event.target);
+    if (!pressable) return;
+    animateTap(pressable);
+  });
 }
 
 function setupInstallPrompt() {
@@ -576,6 +628,7 @@ function render() {
 function init() {
   render();
   bindControls();
+  bindPressFeedback();
   setupInstallPrompt();
   setupStandaloneMode();
   registerServiceWorker();
