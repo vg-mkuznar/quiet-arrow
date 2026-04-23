@@ -1,4 +1,4 @@
-const CACHE_NAME = "quiet-arrow-v1";
+const CACHE_NAME = "quiet-arrow-v2";
 const CORE_ASSETS = [
   "./",
   "./index.html",
@@ -25,6 +25,22 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
+
+  const isCoreAsset = CORE_ASSETS.some((asset) => event.request.url.endsWith(asset.replace("./", "")));
+
+  if (isCoreAsset) {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+          return response;
+        })
+        .catch(() => caches.match(event.request).then((cached) => cached || caches.match("./index.html"))),
+    );
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request).then((cached) => {
       if (cached) return cached;
